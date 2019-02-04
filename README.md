@@ -1,5 +1,7 @@
 # Docker container for PHP project
 
+[![Build Status](https://travis-ci.org/groovytron/php-container.svg?branch=master)](https://travis-ci.org/groovytron/php-container)
+
 Docker container allowing you to build and test your PHP project.
 
 ## Softwares embedded in the container
