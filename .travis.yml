@@ -4,4 +4,5 @@ services:
   - docker
 
 script:
-- make
+  - make 7.2
+  - make 7.1

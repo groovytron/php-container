@@ -1,41 +1,19 @@
-BUILD_NAME=php-container:latest
+BUILD_NAME=php-container
 CONTAINER_NAME=my-php-container
+COMMON_BUILD_TAGS=--build-arg VCS_REF="$(shell git rev-parse HEAD)" --build-arg BUILD_DATE="$(shell date -u +"%Y-%m-%dT%H:%m:%SZ")"
 
 .PHONY: all
-all: build
+all: 7.2
 
-.PHONY: build
-build: Dockerfile
+.PHONY: 7.%
+7.%: Dockerfile
 	docker build \
-		--build-arg VCS_REF="$(shell git rev-parse HEAD)" \
-		--build-arg BUILD_DATE="$(shell date -u +"%Y-%m-%dT%H:%m:%SZ")" \
-		--tag $(BUILD_NAME) .
-
-.PHONY: run
-run: build
-	docker run \
-		-it \
-		--entrypoint /bin/bash \
-		--name $(CONTAINER_NAME) \
-		--user=dev \
-		$(BUILD_NAME)
-
-.PHONY:jumpin
-jumpin:
-	docker exec \
-		-it \
-		--user=dev \
-		$(CONTAINER_NAME) \
-		/bin/bash
-
-.PHONY:rootin
-rootin:
-	docker exec \
-		-it \
-		--user=root \
-		$(CONTAINER_NAME) \
-		/bin/bash
+		$(COMMON_BUILD_TAGS) \
+		--build-arg PHP_VERSION=$@ \
+		--tag $(BUILD_NAME):$@ .
 
 .PHONY:clean
 clean:
-	docker image rm -f $(BUILD_NAME)
+	for VERSION in '7.2' '7.1'; do \
+		docker image rm -f $(BUILD_NAME):$$VERSION; \
+	done

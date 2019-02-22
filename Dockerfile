@@ -1,10 +1,14 @@
 FROM ubuntu:bionic
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PHP_VERSION=7.2
+ARG PHP_VERSION=7.2
 
-RUN apt-get update --quiet \
+RUN apt-get update \
     && apt-get upgrade --quiet --yes \
+    && apt-get install software-properties-common --yes --quiet \
+    && add-apt-repository ppa:ondrej/php --yes \
+    && apt-get update --quiet \
+    && apt-get update --quiet \
     && apt-get install --quiet --yes \
         composer \
         libicu-dev \

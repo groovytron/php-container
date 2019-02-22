@@ -8,7 +8,7 @@ Docker container allowing you to build and test your PHP project.
 
 The following tools are embedded in the container:
 
-- PHP: *7.2.10*
+- PHP: *7.2* or *7.1* depending on the image you use
 - Composer: *1.6.3*
 
 ## Use the container
@@ -26,3 +26,5 @@ To run the container and open a bash in your php project run the following comma
 ## Improvements
 
 - [ ] Use an alpine php docker image to make the container image lighter
+- [ ] Speed up composer installs
+  - <https://medium.com/@c.harrison/speedy-composer-installs-in-docker-builds-41eea6d0172b>
