@@ -1,16 +1,12 @@
 FROM ubuntu:bionic
 
 ENV DEBIAN_FRONTEND=noninteractive
-ARG PHP_VERSION=7.2
+ARG PHP_VERSION
+ARG COMPOSER_VERSION
 
-RUN apt-get update \
+RUN apt-get update --quiet \
     && apt-get upgrade --quiet --yes \
-    && apt-get install software-properties-common --yes --quiet \
-    && add-apt-repository ppa:ondrej/php --yes \
-    && apt-get update --quiet \
-    && apt-get update --quiet \
     && apt-get install --quiet --yes \
-        composer \
         libicu-dev \
         libmariadbclient-dev \
         libpng-dev \
@@ -40,8 +36,13 @@ RUN apt-get update \
         php${PHP_VERSION}-xsl \
         php${PHP_VERSION}-zip \
         unzip \
+        wget \
     && apt-get autoremove --quiet --yes \
-    && apt-get clean
+    && apt-get clean \
+    && wget https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar \
+        --output-document composer.phar \
+        --quiet \
+    && mv composer.phar /usr/local/bin/composer
 
 # Set the locale
 RUN locale-gen en_US
@@ -63,15 +64,30 @@ WORKDIR /var/www/app
 RUN groupadd --gid 1000 dev \
   && useradd --uid 1000 --gid dev --shell /bin/bash --create-home dev
 
+
 # Label schema related variables and metadata
 ARG BUILD_DATE
 ARG VCS_REF
 
 LABEL maintainer="Julien M'Poy <julien.mpoy@gmail.com>" \
     org.label-schema.build-date=${BUILD_DATE} \
+    org.label-schema.schema-version="1.0" \
+    org.label-schema.url="https://github.com/groovytron/php-container" \
     org.label-schema.vcs-ref=${VCS_REF} \
     org.label-schema.vcs-url="https://github.com/groovytron/php-container" \
-    org.label-schema.schema-version="1.0"
+    org.opencontainers.image.authors="Julien M'Poy <julien.mpoy@gmail.com>" \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.revision=${VCS_REF} \
+    org.opencontainers.image.source="https://github.com/groovytron/php-container" \
+    org.opencontainers.image.title="PHP Container" \
+    org.opencontainers.image.description="PHP container for local PHP web development" \
+    org.opencontainers.image.url="https://github.com/groovytron/php-container" \
+    org.opencontainers.image.vendor="Julien M'Poy <julien.mpoy@gmail.com>" \
+    org.opencontainers.image.version="7.2.17"
 
 # Fix permissions issues
 RUN chmod -R a+wrx /var/www/app
+RUN chmod  a+wrx /usr/local/bin/composer
+
+USER dev
+RUN composer global require --no-interaction --no-progress hirak/prestissimo

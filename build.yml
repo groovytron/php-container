@@ -1,0 +1,24 @@
+# This file is only used to build multiple images
+version: '3'
+
+services:
+  php7.1:
+    image: ${COMPOSE_BUILD_NAME}:7.1
+    build:
+      dockerfile: 7.1/Dockerfile
+      context: .
+      args:
+        - VCS_REF=$VCS_REF
+        - BUILD_DATE=$BUILD_DATE
+        - PHP_VERSION=7.1
+        - COMPOSER_VERSION=1.8.5
+  php7.2:
+    image: ${COMPOSE_BUILD_NAME}:7.2
+    build:
+      dockerfile: 7.2/Dockerfile
+      context: .
+      args:
+        - VCS_REF=$VCS_REF
+        - BUILD_DATE=$BUILD_DATE
+        - PHP_VERSION=7.2
+        - COMPOSER_VERSION=1.8.5

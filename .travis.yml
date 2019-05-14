@@ -4,5 +4,5 @@ services:
   - docker
 
 script:
-  - make 7.2
-  - make 7.1
+  - make php7.2
+  - make php7.1

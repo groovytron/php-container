@@ -1,19 +1,23 @@
-BUILD_NAME=php-container
-CONTAINER_NAME=my-php-container
-COMMON_BUILD_TAGS=--build-arg VCS_REF="$(shell git rev-parse HEAD)" --build-arg BUILD_DATE="$(shell date -u +"%Y-%m-%dT%H:%m:%SZ")"
+BUILD_NAME=php
+COMPOSE_BUILD_NAME=php-container
+VERSIONS=7.2 7.1
+ALL=$(addprefix php,$(VERSIONS))
+VCS_REF="$(shell git rev-parse HEAD)"
+BUILD_DATE="$(shell date -u +"%Y-%m-%dT%H:%m:%SZ")"
 
 .PHONY: all
-all: 7.2
+all: $(ALL)
 
-.PHONY: 7.%
-7.%: Dockerfile
-	docker build \
-		$(COMMON_BUILD_TAGS) \
-		--build-arg PHP_VERSION=$@ \
-		--tag $(BUILD_NAME):$@ .
+.PHONY: $(ALL)
+$(ALL):
+	VCS_REF=$(VCS_REF) \
+	BUILD_DATE=$(BUILD_DATE) \
+	COMPOSE_BUILD_NAME=$(COMPOSE_BUILD_NAME) \
+	docker-compose -f build.yml build \
+		$@
 
 .PHONY:clean
 clean:
-	for VERSION in '7.2' '7.1'; do \
-		docker image rm -f $(BUILD_NAME):$$VERSION; \
+	for VERSION in $(VERSIONS); do \
+		docker image rm -f $(COMPOSE_BUILD_NAME):$$VERSION; \
 	done
