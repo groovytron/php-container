@@ -3,6 +3,7 @@ FROM ubuntu:bionic
 ENV DEBIAN_FRONTEND=noninteractive
 ARG PHP_VERSION
 ARG COMPOSER_VERSION
+ARG PRESTISSIMO_VERSION
 
 RUN apt-get update --quiet \
     && apt-get upgrade --quiet --yes \
@@ -80,10 +81,11 @@ LABEL maintainer="Julien M'Poy <julien.mpoy@gmail.com>" \
     org.label-schema.vcs-url="https://github.com/groovytron/php-container" \
     org.opencontainers.image.authors="Julien M'Poy <julien.mpoy@gmail.com>" \
     org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.description="PHP container for local PHP web development" \
+    org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.revision=${VCS_REF} \
     org.opencontainers.image.source="https://github.com/groovytron/php-container" \
     org.opencontainers.image.title="PHP Container" \
-    org.opencontainers.image.description="PHP container for local PHP web development" \
     org.opencontainers.image.url="https://github.com/groovytron/php-container" \
     org.opencontainers.image.vendor="Julien M'Poy <julien.mpoy@gmail.com>" \
     org.opencontainers.image.version="7.1.29"
@@ -93,4 +95,4 @@ RUN chmod -R a+wrx /var/www/app
 RUN chmod  a+wrx /usr/local/bin/composer
 
 USER dev
-RUN composer global require --no-interaction --no-progress hirak/prestissimo
+RUN composer global require --no-interaction --no-progress hirak/prestissimo:${PRESTISSIMO_VERSION}
