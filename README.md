@@ -1,15 +1,17 @@
-# Docker container for PHP project
+# PHP container (Docker container for PHP projects)
 
 [![Build Status](https://travis-ci.org/groovytron/php-container.svg?branch=master)](https://travis-ci.org/groovytron/php-container)
 
-Docker container allowing you to build and test your PHP project.
+Docker container allowing you to build and test your PHP projects.
 
-## Softwares embedded in the container
+## Supported tags and respective `Dockerfile` links
 
-The following tools are embedded in the container:
+- `7.3` ([7.3/Dockerfile](https://github.com/groovytron/php-container/blob/d419b246aab2150a9f34af5a03fc7ddd1adea5d7/7.3/Dockerfile))
+- `7.2` ([7.2/Dockerfile](https://github.com/groovytron/php-container/blob/d419b246aab2150a9f34af5a03fc7ddd1adea5d7/7.2/Dockerfile))
+- `7.1` ([7.1/Dockerfile](https://github.com/groovytron/php-container/blob/d419b246aab2150a9f34af5a03fc7ddd1adea5d7/7.1/Dockerfile))
 
-- PHP: *7.2* or *7.1* depending on the image you use
-- Composer: *1.6.3*
+[`composer`](https://getcomposer.org) is installed in every image to make PHP dependencies installation easier.
+[`prestissimo`](https://github.com/hirak/prestissimo) is also installed to parallelize and speed up dependencies installation with `composer`.
 
 ## Use the container
 
@@ -23,8 +25,22 @@ To run the container and open a bash in your php project run the following comma
 
 `docker run -it --entrypoint /bin/bash --user=dev --volume=<path-to-your-php-project-directory>:/var/www/app groovytron/php:latest`
 
-## Improvements
+## Contributing
 
-- [ ] Use an alpine php docker image to make the container image lighter
-- [ ] Speed up composer installs
-  - <https://medium.com/@c.harrison/speedy-composer-installs-in-docker-builds-41eea6d0172b>
+Pull requests, bug reports, and feature requests are welcome.
+
+### Develop locally
+
+If you want to improve one of these images, your will need the following software installed on your system:
+
+- `docker`
+- `docker-compose` (if you want to build images using the file [build.yml](https://github.com/groovytron/php-container/blob/d419b246aab2150a9f34af5a03fc7ddd1adea5d7/build.yml))
+- `make` (if you want to build images using the file [build.yml](https://github.com/groovytron/php-container/blob/d419b246aab2150a9f34af5a03fc7ddd1adea5d7/build.yml) and abstract from it with the [Makefile](https://github.com/groovytron/php-container/blob/d419b246aab2150a9f34af5a03fc7ddd1adea5d7/Makefile))
+
+Once you have the above softwares installed, run `make php7.3` to build the `php7.3` image.
+To build all the images, run `make all`.
+If you want to clean your builds, simply run `make clean`.
+
+## License
+
+MIT License. See the LICENSE file.
