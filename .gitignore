@@ -181,3 +181,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/vim,osx,emacs,linux,windows,sublimetext,visualstudiocode
+
+laravel-project
+symfony-project

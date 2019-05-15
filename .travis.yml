@@ -3,7 +3,19 @@ sudo: required
 services:
   - docker
 
+env:
+  matrix:
+    - PHP_VERSION=7.3
+    - PHP_VERSION=7.2
+    - PHP_VERSION=7.1
+
 script:
-  - make php7.3
-  - make php7.2
-  - make php7.1
+  - make "php$PHP_VERSION"
+  - chmod --recursive a+wrx .
+  - >
+    docker run
+    -it
+    --volume $(pwd):/var/www/app:rw
+    --user dev
+    "php-container:$PHP_VERSION"
+    bash ./test.sh
