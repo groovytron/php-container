@@ -25,6 +25,47 @@ To run the container and open a bash in your php project run the following comma
 
 `docker run -it --entrypoint /bin/bash --user=dev --volume=<path-to-your-php-project-directory>:/var/www/app groovytron/php:latest`
 
+### Troubleshooting
+
+#### Impossible to run `composer install` or `composer update` when prestissimo is installed
+
+```console
+Downloading https://repo.packagist.org/packages.json
+
+
+  [ErrorException]
+  mkdir(): Not a directory
+
+
+Exception trace:
+ () at /home/dev/.composer/vendor/hirak/prestissimo/src/CopyRequest.php:103
+ Composer\Util\ErrorHandler::handle() at n/a:n/a
+ mkdir() at /home/dev/.composer/vendor/hirak/prestissimo/src/CopyRequest.php:103
+ Hirak\Prestissimo\CopyRequest->createDir() at /home/dev/.composer/vendor/hirak/prestissimo/src/CopyRequest.php:89
+ Hirak\Prestissimo\CopyRequest->setDestination() at /home/dev/.composer/vendor/hirak/prestissimo/src/CopyRequest.php:39
+ Hirak\Prestissimo\CopyRequest->__construct() at /home/dev/.composer/vendor/hirak/prestissimo/src/ParallelizedComposerRepository.php:26
+ Hirak\Prestissimo\ParallelizedComposerRepository->preloadProviderListings() at /home/dev/.composer/vendor/hirak/prestissimo/src/ParallelizedComposerRepository.php:39
+ Hirak\Prestissimo\ParallelizedComposerRepository->prefetch() at /home/dev/.composer/vendor/hirak/prestissimo/src/Plugin.php:150
+ Hirak\Prestissimo\Plugin->prefetchComposerRepositories() at /home/dev/.composer/vendor/hirak/prestissimo/src/Plugin.php:82
+ Hirak\Prestissimo\Plugin->activate() at phar:///usr/local/bin/composer/src/Composer/Plugin/PluginManager.php:236
+ Composer\Plugin\PluginManager->addPlugin() at phar:///usr/local/bin/composer/src/Composer/Plugin/PluginManager.php:205
+ Composer\Plugin\PluginManager->registerPackage() at phar:///usr/local/bin/composer/src/Composer/Plugin/PluginManager.php:261
+ Composer\Plugin\PluginManager->loadRepository() at phar:///usr/local/bin/composer/src/Composer/Plugin/PluginManager.php:79
+ Composer\Plugin\PluginManager->loadInstalledPlugins() at phar:///usr/local/bin/composer/src/Composer/Factory.php:384
+ Composer\Factory->createComposer() at phar:///usr/local/bin/composer/src/Composer/Factory.php:576
+ Composer\Factory::create() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:345
+ Composer\Console\Application->getComposer() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:458
+ Composer\Console\Application->getPluginCommands() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:156
+ Composer\Console\Application->doRun() at phar:///usr/local/bin/composer/vendor/symfony/console/Application.php:117
+ Symfony\Component\Console\Application->run() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:104
+ Composer\Console\Application->run() at phar:///usr/local/bin/composer/bin/composer:61
+ require() at /usr/local/bin/composer:24
+```
+
+If you get the above error when running `composer install` or `composer update` and you have set the environment variable `COMPOSER_CACHE_DIR` to `/dev/null`, setting this variable to another location where the current user can read and write should fix the problem.
+
+If this doesn't fix the issue, please comment [the issue #4](https://github.com/groovytron/php-container/issues/4) or reopen a new one.
+
 ## Contributing
 
 Pull requests, bug reports, and feature requests are welcome.
