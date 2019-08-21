@@ -11,6 +11,8 @@ RUN apt-get update --quiet \
     && add-apt-repository ppa:ondrej/php \
     && apt-get update --quiet \
     && apt-get install --quiet --yes \
+        bash-completion \
+        git \
         libicu-dev \
         libmariadbclient-dev \
         libpng-dev \

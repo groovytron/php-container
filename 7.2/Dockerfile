@@ -8,6 +8,8 @@ ARG PRESTISSIMO_VERSION
 RUN apt-get update --quiet \
     && apt-get upgrade --quiet --yes \
     && apt-get install --quiet --yes \
+        bash-completion \
+        git \
         libicu-dev \
         libmariadbclient-dev \
         libpng-dev \
