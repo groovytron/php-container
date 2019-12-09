@@ -1,6 +1,6 @@
 BUILD_NAME=php
 COMPOSE_BUILD_NAME=php-container
-VERSIONS=7.3 7.2 7.1
+VERSIONS=7.4 7.3 7.2 7.1
 ALL=$(addprefix php,$(VERSIONS))
 VCS_REF="$(shell git rev-parse HEAD)"
 BUILD_DATE="$(shell date -u +"%Y-%m-%dT%H:%m:%SZ")"

@@ -87,7 +87,7 @@ LABEL maintainer="Julien M'Poy <julien.mpoy@gmail.com>" \
     org.opencontainers.image.title="PHP Container" \
     org.opencontainers.image.url="https://github.com/groovytron/php-container" \
     org.opencontainers.image.vendor="Julien M'Poy <julien.mpoy@gmail.com>" \
-    org.opencontainers.image.version="7.2.17"
+    org.opencontainers.image.version=${PHP_VERSION}
 
 # Fix permissions issues
 RUN chmod -R a+wrx /var/www/app
