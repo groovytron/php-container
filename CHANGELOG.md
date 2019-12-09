@@ -2,6 +2,7 @@
 
 ## 1.1.0
 
+- feat: add Makefile target for container images publishing
 - feat: add brand new PHP 7.4 image
 - change: bump composer to version 1.9.1
 
