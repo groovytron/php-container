@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+- feat: add [`xdebug`](https://xdebug.org/) to all images to make code coverage possible in tests
+- change: bump composer to version 1.10.10
+- change: bump prestissimo to version 0.3.10
+
 ## 1.1.0
 
 - feat: add Makefile target for container images publishing
