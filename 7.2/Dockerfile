@@ -34,6 +34,7 @@ RUN apt-get update --quiet \
         php${PHP_VERSION}-redis \
         php${PHP_VERSION}-soap \
         php${PHP_VERSION}-sqlite3 \
+        php${PHP_VERSION}-xdebug \
         php${PHP_VERSION}-xml \
         php${PHP_VERSION}-xmlrpc \
         php${PHP_VERSION}-xsl \
