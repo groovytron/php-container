@@ -9,9 +9,9 @@ services:
       context: .
       args:
         - BUILD_DATE=$BUILD_DATE
-        - COMPOSER_VERSION=1.9.1
+        - COMPOSER_VERSION=1.10.10
         - PHP_VERSION=7.4
-        - PRESTISSIMO_VERSION=0.3.9
+        - PRESTISSIMO_VERSION=0.3.10
         - VCS_REF=$VCS_REF
   php7.3:
     image: ${COMPOSE_BUILD_NAME}:7.3
@@ -20,9 +20,9 @@ services:
       context: .
       args:
         - BUILD_DATE=$BUILD_DATE
-        - COMPOSER_VERSION=1.9.1
+        - COMPOSER_VERSION=1.10.10
         - PHP_VERSION=7.3
-        - PRESTISSIMO_VERSION=0.3.9
+        - PRESTISSIMO_VERSION=0.3.10
         - VCS_REF=$VCS_REF
   php7.2:
     image: ${COMPOSE_BUILD_NAME}:7.2
@@ -31,9 +31,9 @@ services:
       context: .
       args:
         - BUILD_DATE=$BUILD_DATE
-        - COMPOSER_VERSION=1.9.1
+        - COMPOSER_VERSION=1.10.10
         - PHP_VERSION=7.2
-        - PRESTISSIMO_VERSION=0.3.9
+        - PRESTISSIMO_VERSION=0.3.10
         - VCS_REF=$VCS_REF
   php7.1:
     image: ${COMPOSE_BUILD_NAME}:7.1
@@ -42,7 +42,7 @@ services:
       context: .
       args:
         - BUILD_DATE=$BUILD_DATE
-        - COMPOSER_VERSION=1.9.1
+        - COMPOSER_VERSION=1.10.10
         - PHP_VERSION=7.1
-        - PRESTISSIMO_VERSION=0.3.9
+        - PRESTISSIMO_VERSION=0.3.10
         - VCS_REF=$VCS_REF
