@@ -19,7 +19,6 @@ RUN apt-get update --quiet \
         libpq-dev \
         libxml2-dev \
         locales \
-        php${PHP_VERSION} \
         php${PHP_VERSION}-bcmath \
         php${PHP_VERSION}-bz2 \
         php${PHP_VERSION}-cli \
