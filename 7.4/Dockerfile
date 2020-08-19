@@ -33,6 +33,7 @@ RUN apt-get update --quiet \
         php${PHP_VERSION}-ldap \
         php${PHP_VERSION}-mbstring \
         php${PHP_VERSION}-mysql \
+        php${PHP_VERSION}-pear \
         php${PHP_VERSION}-pgsql \
         php${PHP_VERSION}-redis \
         php${PHP_VERSION}-soap \
