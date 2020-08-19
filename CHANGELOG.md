@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1
+
+- feat: add `php-pear` package to make PECL packages installation possible in the image
+- remove: remove the installation of the generic `php` which installs `apache` that is not needed in the usage of this image
+
 ## 1.2.0
 
 - feat: add [`xdebug`](https://xdebug.org/) to all images to make code coverage possible in tests
