@@ -3,7 +3,6 @@ FROM ubuntu:bionic
 ENV DEBIAN_FRONTEND=noninteractive
 ARG PHP_VERSION
 ARG COMPOSER_VERSION
-ARG PRESTISSIMO_VERSION
 
 RUN apt-get update --quiet \
     && apt-get upgrade --quiet --yes \
@@ -98,4 +97,3 @@ RUN chmod -R a+wrx /var/www/app
 RUN chmod  a+wrx /usr/local/bin/composer
 
 USER dev
-RUN composer global require --no-interaction --no-progress hirak/prestissimo:${PRESTISSIMO_VERSION}
