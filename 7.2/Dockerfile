@@ -95,4 +95,4 @@ RUN chmod -R a+wrx /var/www/app
 RUN chmod  a+wrx /usr/local/bin/composer
 
 USER dev
-RUN composer global require --no-interaction --no-progress hirak/prestissimo:${PRESTISSIMO_VERSION}
+# RUN composer global require --no-interaction --no-progress hirak/prestissimo:${PRESTISSIMO_VERSION}
