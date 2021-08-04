@@ -1,0 +1,16 @@
+name: hadolint
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+
+jobs:
+  hadolint:
+    name: hadolint
+    runs-on: ubuntu-latest
+    container: hadolint/hadolint:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: lint 0.0.1
+        run: hadolint 0.0.1/Dockerfile
