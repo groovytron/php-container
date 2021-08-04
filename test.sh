@@ -2,7 +2,6 @@
 
 php --version
 composer --version
-composer global show hirak/prestissimo
 
 composer create-project laravel/laravel laravel-project --no-progress --profile --prefer-dist || exit 1
 composer clear-cache
