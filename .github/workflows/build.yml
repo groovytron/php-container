@@ -15,9 +15,19 @@ jobs:
           - 7.3
           - 7.2
           - 7.1
+    env:
+      PHP_VERSION: ${{ matrix.php_version }}
     steps:
       - uses: actions/checkout@v1
       - name: Build the docker-compose stack
-        env:
-          PHP_VERSION: ${{ matrix.php_version }}
         run: make "php$PHP_VERSION"
+      - name: Fix folder permissions
+        run: chmod --recursive a+wrx .
+      - name: Test container
+        run: >
+          docker run
+          -it
+          --volume $(pwd):/var/www/app:rw
+          --user dev
+          "php-container:$PHP_VERSION"
+          bash ./test.sh
