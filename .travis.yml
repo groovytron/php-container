@@ -15,7 +15,6 @@ script:
   - chmod --recursive a+wrx .
   - >
     docker run
-    -it
     --volume $(pwd):/var/www/app:rw
     --user dev
     "php-container:$PHP_VERSION"
