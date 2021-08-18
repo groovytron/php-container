@@ -24,6 +24,7 @@ jobs:
       - name: Fix folder permissions
         run: chmod --recursive a+wrx .
       - name: Test container
+        shell: 'script -q -e -c "bash --noprofile --norc -eo pipefail {0}"'
         run: >
           docker run
           -it
