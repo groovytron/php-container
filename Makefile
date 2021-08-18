@@ -28,6 +28,8 @@ clean:
 .PHONY:publish-docker-images
 publish-docker-images:
 	for VERSION in $(VERSIONS); do \
+		docker tag $(COMPOSE_BUILD_NAME):$$VERSION $(DOCKERHUB_USER)/$(BUILD_NAME):$$VERSION-$(VCS_REF) && \
+		docker push $(DOCKERHUB_USER)/$(BUILD_NAME):$$VERSION-$(VCS_REF) && \
 		docker tag $(COMPOSE_BUILD_NAME):$$VERSION $(DOCKERHUB_USER)/$(BUILD_NAME):$$VERSION && \
 		docker push $(DOCKERHUB_USER)/$(BUILD_NAME):$$VERSION; \
 	done && \
